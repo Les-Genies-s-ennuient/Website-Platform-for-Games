@@ -5,7 +5,7 @@ const pool = new Pool({
     host: 'localhost',
     database: 'api',
     password: 'admin',
-    port: 5432,
+    port: 5439,
 })
 
 const getGames = (request, response) => {

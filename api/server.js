@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
+const init_db = require('./src/controllers/init-db');
 
 const config = {
     name: 'sample-express-app',
@@ -20,6 +21,9 @@ app.use(ExpressAPILogMiddleware(logger, { request: true }));
 app.get('/', (req, res) => {
     res.status(200).send('hello world');
 });
+
+// init and/or migrate db
+init_db.init_db()
 
 // add routes to api
 routes(app)

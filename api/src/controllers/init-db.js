@@ -4,8 +4,8 @@ log.setLevel('info')
 
 const username = 'postgres'
 const password = 'admin'
-const host = 'localhost'
-const port = 5439
+const host = 'website-platform-for-games_db_1'
+const port = 5432
 
 const createAPIifNotExists = (done) => {
     const pool_postgres = new Pool({
@@ -15,8 +15,6 @@ const createAPIifNotExists = (done) => {
         password: password,
         port: port,
     })
-    
-    log.info('test if api db exists')
     var query = `
     SELECT
         COUNT(*) AS nb_dbs
@@ -25,11 +23,10 @@ const createAPIifNotExists = (done) => {
     WHERE datname = 'api'`
     pool_postgres.query(query, (error, results) => {
         if (error) {
-            log.error(error)
-            throw error
+            log.error('db is not up')
+            return
         }
         nb_api_dbs = parseInt(results.rows[0].nb_dbs)
-        log.info('Nb dbs named api: ' + nb_api_dbs)
         if (nb_api_dbs === 0) {
             log.info("Creating api's database")
             query = 'CREATE DATABASE api'
@@ -43,14 +40,13 @@ const createAPIifNotExists = (done) => {
                 done()
             })
         }
-        else { 
-            log.info("API db already exists")
+        else {
             pool_postgres.end()
         }
     })
 }
 
-const init_db = () => {
+const init_db = (done) => {
     createAPIifNotExists(() => {
 
         const pool_api = new Pool({
@@ -105,7 +101,7 @@ const init_db = () => {
             })
         })
     })
-    return
+    done
 }
 
 module.exports = {

@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 // init and/or migrate db
-init_db.init_db()
+setInterval(init_db.init_db, 5000, () => {console.log("migration done")})
 
 // add routes to api
 routes(app)

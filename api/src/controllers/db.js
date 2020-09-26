@@ -2,10 +2,10 @@ const uuidv4 = require('uuid').v4
 const Pool = require('pg').Pool
 const pool = new Pool({
     user: 'postgres',
-    host: 'localhost',
+    host: 'website-platform-for-games_db_1',
     database: 'api',
     password: 'admin',
-    port: 5439,
+    port: 5432,
 })
 
 const getGames = (request, response) => {

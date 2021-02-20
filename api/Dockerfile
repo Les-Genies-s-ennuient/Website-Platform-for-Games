@@ -5,7 +5,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY . .
-RUN yarn install
+RUN yarn install --ignore-optional
 
 
 EXPOSE 3001

@@ -1,13 +1,13 @@
-FROM node:13.12.0-alpine
+FROM node:14.15.5-alpine
 
 RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
 COPY . .
+RUN yarn install
 
-RUN npm install
 
 EXPOSE 3001
 
-CMD ["npm", "run", "start"]
+CMD ["yarn", "run", "start"]

@@ -13,7 +13,7 @@ you'll need to install on your computer: nodejs, npm<br />
 Then run those commands to start the service:
 * `yarn install --save-dev` (to install javascript/typescript dependencies)
 * `yarn start-dev` (to start with ts_node interpreter)
-* `yarn build++` (after code changes: run linter, regenerate openapi routes and specs, and build project)
+* `yarn build++` (after code changes: run linter, regenerate openapi routes and specs, regenerate typescript client, and build project)
 * `yarn build++ && yarn start` (to transpile typescript project in node and start built server)
 
 ### to run with docker:

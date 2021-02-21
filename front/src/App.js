@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import CreateGameComponent from './components/create-game/create-game';
 import LoggingPage from './components/login-page/login-page';
 import Home from './components/home/home';
 import {
@@ -31,6 +32,9 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
+              <Link to="/game">New Game</Link>
+            </li>
+            <li>
               <Link to="/login">Login</Link>
             </li>
           </ul>
@@ -41,6 +45,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <LoggingPage userUpdate = {changeUser}/>
+          </Route>
+          <Route path="/game">
+            <CreateGameComponent />
           </Route>
           <Route path="/">
             <Home />

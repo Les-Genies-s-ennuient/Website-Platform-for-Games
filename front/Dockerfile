@@ -8,8 +8,12 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 # install app dependencies
-COPY . .
+COPY package.json .
+COPY yarn.lock .
 RUN yarn install --ignore-optional
+
+COPY . .
+RUN yarn build
 
 # start app
 CMD ["yarn", "start"]

@@ -10,7 +10,7 @@
     "tsoa": "tsoa spec-and-routes",
     "build": "tsc",
     "codegen": "openapi-generator-cli generate",
-    "build++": "yarn lint && yarn tsoa && yarn codegen && yarn build"
+    "build++": "yarn lint && yarn tsoa && yarn build"
   },
   "author": "Pierre-Marie Airiau",
   "license": "ISC",

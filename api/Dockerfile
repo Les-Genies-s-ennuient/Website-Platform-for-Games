@@ -4,11 +4,15 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-COPY . .
+# install app dependencies
+COPY package.json .
+COPY yarn.lock .
 RUN yarn install --ignore-optional
+
+COPY . .
 RUN yarn build++
 
 
 EXPOSE 3001
 
-CMD ["yarn", "run", "start"]
+CMD ["yarn", "start"]

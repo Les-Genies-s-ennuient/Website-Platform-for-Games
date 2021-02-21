@@ -1,13 +1,14 @@
-FROM node:11-alpine
+FROM node:14.15.5-alpine
 
 RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
 COPY . .
+RUN yarn install --ignore-optional
+RUN yarn build++
 
-RUN npm install
 
-EXPOSE 3000
+EXPOSE 3001
 
-CMD ["npm", "run", "start"]
+CMD ["yarn", "run", "start"]

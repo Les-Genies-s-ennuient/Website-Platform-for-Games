@@ -1,0 +1,237 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"GameTypes": {
+				"enum": [
+					"free",
+					"tarot",
+					"poker"
+				],
+				"type": "string"
+			},
+			"Game": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"game_type": {
+						"$ref": "#/components/schemas/GameTypes"
+					},
+					"start_time": {
+						"type": "string"
+					},
+					"end_time": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"game_type",
+					"start_time",
+					"end_time"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Games": {
+				"items": {
+					"$ref": "#/components/schemas/Game"
+				},
+				"type": "array"
+			},
+			"Player": {
+				"properties": {
+					"game_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"player_name": {
+						"type": "string"
+					},
+					"player_token": {
+						"type": "string"
+					},
+					"creation_time": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"game_id",
+					"player_name",
+					"player_token",
+					"creation_time"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Players": {
+				"items": {
+					"$ref": "#/components/schemas/Player"
+				},
+				"type": "array"
+			},
+			"CreatePlayerRequest": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"gameId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"gameId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "api",
+		"version": "1.0.0",
+		"description": "api for website platform for games",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Pierre-Marie Airiau"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/games/all": {
+			"get": {
+				"operationId": "GetGames",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Games"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/games/get/{id}": {
+			"get": {
+				"operationId": "GetGame",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Game"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/games/new-game/{gameType}": {
+			"post": {
+				"operationId": "CreateGame",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "gameType",
+						"required": true,
+						"schema": {
+							"$ref": "#/components/schemas/GameTypes"
+						}
+					}
+				]
+			}
+		},
+		"/players/get/{gameId}": {
+			"get": {
+				"operationId": "GetPlayers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Players"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "gameId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/players/new-player": {
+			"post": {
+				"operationId": "CreatePlayer",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreatePlayerRequest"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

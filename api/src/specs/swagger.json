@@ -74,23 +74,6 @@
 					"$ref": "#/components/schemas/Player"
 				},
 				"type": "array"
-			},
-			"CreatePlayerRequest": {
-				"properties": {
-					"name": {
-						"type": "string"
-					},
-					"gameId": {
-						"type": "number",
-						"format": "double"
-					}
-				},
-				"required": [
-					"name",
-					"gameId"
-				],
-				"type": "object",
-				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -123,6 +106,7 @@
 						}
 					}
 				},
+				"description": "get all games registered",
 				"security": [],
 				"parameters": []
 			}
@@ -142,9 +126,11 @@
 						}
 					}
 				},
+				"description": "return infos about the Game Id requested",
 				"security": [],
 				"parameters": [
 					{
+						"description": "gameId",
 						"in": "path",
 						"name": "id",
 						"required": true,
@@ -160,13 +146,23 @@
 			"post": {
 				"operationId": "CreateGame",
 				"responses": {
-					"204": {
-						"description": "No content"
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "number",
+									"format": "double"
+								}
+							}
+						}
 					}
 				},
+				"description": "Create a new game",
 				"security": [],
 				"parameters": [
 					{
+						"description": "which type of game do you want to create",
 						"in": "path",
 						"name": "gameType",
 						"required": true,
@@ -175,6 +171,26 @@
 						}
 					}
 				]
+			}
+		},
+		"/health": {
+			"get": {
+				"operationId": "GetHealth",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"description": "get all games registered",
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/players/get/{gameId}": {
@@ -192,9 +208,11 @@
 						}
 					}
 				},
+				"description": "get player infos for a specific game",
 				"security": [],
 				"parameters": [
 					{
+						"description": "gameId for which you want players",
 						"in": "path",
 						"name": "gameId",
 						"required": true,
@@ -210,22 +228,40 @@
 			"post": {
 				"operationId": "CreatePlayer",
 				"responses": {
-					"204": {
-						"description": "No content"
-					}
-				},
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/CreatePlayerRequest"
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
 							}
 						}
 					}
-				}
+				},
+				"description": "Register a new player for a game",
+				"security": [],
+				"parameters": [
+					{
+						"description": "name of the player you want to register",
+						"in": "query",
+						"name": "name",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "gameId for which you want to register the player",
+						"in": "query",
+						"name": "gameId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			}
 		}
 	},

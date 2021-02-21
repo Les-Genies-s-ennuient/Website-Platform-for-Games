@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import CreateGameComponent from './components/create-game/create-game';
 import LoggingPage from './components/login-page/login-page';
+import Dashboard from './components/dashboard/Dashboard'
 import Home from './components/home/home';
 import {
   BrowserRouter as Router,
@@ -43,6 +44,9 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
           <Route path="/login">
             <LoggingPage userUpdate = {changeUser}/>
           </Route>

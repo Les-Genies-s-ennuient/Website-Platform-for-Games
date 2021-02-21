@@ -6,8 +6,7 @@ WORKDIR /usr/src/app
 
 COPY . .
 RUN yarn install --ignore-optional
-RUN yarn tsoa
-RUN yarn build
+RUN yarn build++
 
 
 EXPOSE 3001

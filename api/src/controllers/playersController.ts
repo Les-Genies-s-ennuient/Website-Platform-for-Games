@@ -20,8 +20,8 @@ export class playersController extends Controller{
     }
 
     @Post('/new-player')
-    public async createPlayer (@Body() body: CreatePlayerRequest): Promise<void> {
-        await players.createNewPlayer(body.name, body.gameId)
+    public async createPlayer (@Body() body: CreatePlayerRequest): Promise<string> {
+        return players.createNewPlayer(body.name, body.gameId)
     }
 }
 

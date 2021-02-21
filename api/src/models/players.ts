@@ -38,6 +38,15 @@ export class PlayersModel {
         return players
     }
 
+    public async identify(token: string): Promise<Player> {
+        const players = await postgresDB.select(`
+        SELECT *
+        FROM players
+        WHERE player_token = '${token}'
+        ORDER BY id ASC`)
+        return players[0]
+    }
+
     public async createNewPlayer(playerName: string, gameId: number): Promise<string> {
         const playerToken = uuid()
         await postgresDB.query(`

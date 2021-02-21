@@ -88,7 +88,7 @@ export function RegisterRoutes(app: express.Router) {
             promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/games/:id',
+        app.get('/games/get/:id',
             function (request: any, response: any, next: any) {
             const args = {
                     id: {"in":"path","name":"id","required":true,"dataType":"double"},
@@ -132,7 +132,7 @@ export function RegisterRoutes(app: express.Router) {
             promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/players/:gameId',
+        app.get('/players/get/:gameId',
             function (request: any, response: any, next: any) {
             const args = {
                     gameId: {"in":"path","name":"gameId","required":true,"dataType":"double"},

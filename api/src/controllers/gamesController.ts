@@ -24,8 +24,8 @@ export class gamesController extends Controller{
     }
 
     @Post('/new-game/{gameType}')
-    public async createGame (@Path() gameType: GameTypes): Promise<void> {
-        await games.createNewGame(gameType)
+    public async createGame (@Path() gameType: GameTypes): Promise<number> {
+        return games.createNewGame(gameType)
     }
 }
 

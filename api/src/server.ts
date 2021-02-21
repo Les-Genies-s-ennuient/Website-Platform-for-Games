@@ -1,16 +1,21 @@
 import { RegisterRoutes } from "./routes/routes";
-import express from 'express'
+import express, { Response as ExResponse, Request as ExRequest } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import config from 'config'
+import swaggerUi from "swagger-ui-express"
 
 export const app = express()
 
 app.use(bodyParser.json())
 app.use(cors())
 
-// add routes to api
-// routes(app)
+app.use("/docs", swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
+    return res.send(
+      swaggerUi.generateHTML(await import("./specs/swagger.json"))
+    );
+  });
+
 RegisterRoutes(app)
 
 app.listen(

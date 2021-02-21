@@ -35,8 +35,6 @@ services:
       - "3000:3000"
     depends_on:
       - "api"
-    stdin_open: true
-    tty: true
 
 volumes:
   my_dbdata:

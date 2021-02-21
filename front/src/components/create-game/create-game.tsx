@@ -1,9 +1,11 @@
 import React from 'react';
 import { apiConnector } from '../../connectors/api-connector'
 
-class CreateGameComponent extends React.Component {
+type State = any;
 
-    constructor(props) {
+class CreateGameComponent extends React.Component<{}, State> {
+
+    constructor(props: {}) {
         super(props);
         this.state = {
             GameId: ''
@@ -14,7 +16,7 @@ class CreateGameComponent extends React.Component {
     }
 
     // A custom function to change the name in our state to match the user input
-    async onChange(e) {
+    async onChange(e: any) {
         const gameId = await apiConnector.getQueryAPI(`games/new-game/${e.target.value}`)
         this.setState({
             GameId: gameId

@@ -19,7 +19,7 @@ function App() {
   React.useEffect(() => {
     localStorage.setItem('myUser', user);
   }, [user]);
-  const changeUser = event => setUser(event.target.value);
+  const changeUser = (event: any) => setUser(event.target.value);
 
   return (
     <Router>
@@ -48,6 +48,7 @@ function App() {
             <Dashboard />
           </Route>
           <Route path="/login">
+            {/* @ts-expect-error ts-migrate(2322) FIXME: Type '{ userUpdate: (event: any) => void; }' is no... Remove this comment to see the full error message */}
             <LoggingPage userUpdate = {changeUser}/>
           </Route>
           <Route path="/game">
